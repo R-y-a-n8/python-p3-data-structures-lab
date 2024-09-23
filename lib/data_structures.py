@@ -17,31 +17,36 @@ spicy_foods = [
 ]
 
 def get_names(spicy_foods):
+    """Return a list of names of spicy foods."""
     return [food["name"] for food in spicy_foods]
 
 def get_spiciest_foods(spicy_foods):
-    max_heat_level = max(food["heat_level"] for food in spicy_foods)
-    return [food for food in spicy_foods if food["heat_level"] == max_heat_level]
+    """Return a list of spicy foods with heat level greater than 5."""
+    return [food for food in spicy_foods if food["heat_level"] > 5]
 
 def print_spicy_foods(spicy_foods):
+    """Print each spicy food with its name, cuisine, and heat level."""
     for food in spicy_foods:
-        heat_level_emojis = "🌶" * food['heat_level']
-        print(f"{food['name']} ({food['cuisine']}) | Heat Level: {heat_level_emojis}")
+        print(f"{food['name']} ({food['cuisine']}) | Heat Level: {'🌶' * food['heat_level']}")
 
 def get_spicy_food_by_cuisine(spicy_foods, cuisine):
+    """Return the spicy food dictionary that matches the given cuisine."""
     for food in spicy_foods:
-        if food["cuisine"] == cuisine:
+        if food["cuisine"].lower() == cuisine.lower():
             return food
-    return None
+    return None  
 
 def print_spiciest_foods(spicy_foods):
+    """Print only the spicy foods that have a heat level greater than 5."""
     spiciest_foods = get_spiciest_foods(spicy_foods)
-    for food in spiciest_foods:
-        heat_level_emojis = "🌶" * food['heat_level']
-        print(f"{food['name']} ({food['cuisine']}) | Heat Level: {heat_level_emojis}")
+    print_spicy_foods(spiciest_foods)
 
-def get_average_heat_level(spicy_foods):
-    return sum(food["heat_level"] for food in spicy_foods) / len(spicy_foods)
+def average_heat_level(spicy_foods):
+    """Return the average heat level of all spicy foods."""
+    total_heat = sum(food["heat_level"] for food in spicy_foods)
+    return total_heat // len(spicy_foods)  
 
-def create_spicy_food(spicy_foods, spicy_food):
-    spicy_foods.append(spicy_food)
+def create_spicy_food(spicy_foods, new_spicy_food):
+    """Add a new spicy food to the list and return the updated list."""
+    spicy_foods.append(new_spicy_food)
+    return spicy_foods
